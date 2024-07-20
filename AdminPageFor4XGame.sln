@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPageFor4XGame.Server", "AdminPageFor4XGame.Server\AdminPageFor4XGame.Server.csproj", "{0CF3A3C6-78FD-4287-99B4-683FC89CB4D9}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "adminpagefor4xgame.client", "adminpagefor4xgame.client\adminpagefor4xgame.client.esproj", "{EACEA879-413B-469B-8354-D13AF5B701FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CF3A3C6-78FD-4287-99B4-683FC89CB4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CF3A3C6-78FD-4287-99B4-683FC89CB4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CF3A3C6-78FD-4287-99B4-683FC89CB4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CF3A3C6-78FD-4287-99B4-683FC89CB4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACEA879-413B-469B-8354-D13AF5B701FA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3397CA3-95CF-4627-A3E6-42F29E45A125}
+	EndGlobalSection
+EndGlobal
