@@ -151,7 +151,7 @@ const SSignUp = () => {
                         error={errors.passwordAgain}
                     />
                     <PntButton label="SignUp" onClick={handleButtonClick} />
-                    <SignUp href="/signup">Already have an account? Login</SignUp>
+                    <SignUp href="/login">Already have an account? Login</SignUp>
                 </Container>
             </AppWrapper>
         </>
