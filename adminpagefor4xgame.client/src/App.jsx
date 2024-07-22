@@ -1,11 +1,11 @@
 import 'react'
-import SLogin from './Screens/SLogin';
+import SSignUp from './Screens/SSignUp.jsx';
 
 function App() {
 
     return (
 
-        <SLogin />);
+        <SSignUp />);
     
 }
 

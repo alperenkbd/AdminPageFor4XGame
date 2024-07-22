@@ -12,6 +12,7 @@ const PntInput = (props) => {
         onBlur,
         leftIcon,
         rightIcon,
+        error,
         onRightIconClick } = props;
 
 
@@ -36,6 +37,7 @@ const PntInput = (props) => {
                     </IconRight>
                 )}
             </InputContainer>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </Wrapper>
     );
 };
@@ -89,6 +91,12 @@ const IconRight = styled.span`
     right: 8px;
     display: flex;
     align-items: center;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 `;
 
 
