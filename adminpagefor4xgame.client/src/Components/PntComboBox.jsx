@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const ComboBox = (props) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
-    const { options, label, error } = props;
+    const { options, label, error, placeholder } = props;
 
     const handleChange = (option) => {
         setSelectedOption(option);
@@ -18,18 +18,31 @@ const ComboBox = (props) => {
     //];
 
     return (
-        <div>
-            <label htmlFor="comboBox">{ label }</label>
+        <Wrapper>
+            {label && <Label>{label}</Label>}
             <Select
                 id="comboBox"
                 value={selectedOption}
                 onChange={handleChange}
                 options={options}
+                placeholder={placeholder}
             />
             {error && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
+        </Wrapper>
     );
 };
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+`;
+
+const Label = styled.label`
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+`;
 
 const ErrorMessage = styled.div`
   color: red;

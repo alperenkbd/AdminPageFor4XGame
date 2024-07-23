@@ -19,9 +19,9 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+//    .AddEntityFrameworkStores<ApplicationDbContext>()
+//    .AddDefaultTokenProviders();
 
 
 
