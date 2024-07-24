@@ -2,21 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Modal = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+    
 
-    const { content } = props;
+    const { content, label, leftIcon, openModal, isOpen, closeModal } = props;
 
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
+    
 
     return (
         <div>
-            <OpenButton onClick={openModal}>Open Modal</OpenButton>
+            <OpenButton onClick={openModal}>{label}{leftIcon && <IconLeft>{leftIcon}</IconLeft>}</OpenButton>
 
             {isOpen && (
                 <ModalOverlay>
@@ -31,8 +25,12 @@ const Modal = (props) => {
 };
 
 
+
+
 const OpenButton = styled.button`
-  padding: 10px 20px;
+  padding: 20px 20px;
+  margin-top:10px;
+  margin-bottom:10px;
   background-color: #FF6000;
   color: white;
   border: none;
@@ -58,7 +56,10 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   background: linear-gradient(180deg, #F8EDED, #FF8225);
-  padding: 20px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-right: 20px;
+  padding-left: 20px;
   border-radius: 5px;
   position: relative;
   width: 80%;
@@ -76,6 +77,14 @@ const CloseButton = styled.span`
   &:hover {
     color: #f00;
   }
+`;
+
+
+const IconLeft = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding:8px;
 `;
 
 export default Modal;

@@ -26,12 +26,20 @@ const MyDataGrid = (props) => {
 
     return (
         <>
-            <h2>{header}</h2>
+            <Header>{header}</Header>
             <>{customComponent}</>
             <DataGrid  columns={columns} rows={rows}  />
         </>
     );
 };
+
+
+const Header = styled.h1`
+  color:#FFE6C7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 
 

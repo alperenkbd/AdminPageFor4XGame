@@ -13,7 +13,10 @@ const PntInput = (props) => {
         leftIcon,
         rightIcon,
         error,
-        onRightIconClick } = props;
+        onRightIconClick,
+        min,
+        max,
+        onFocusOut} = props;
 
 
     return (
@@ -30,6 +33,8 @@ const PntInput = (props) => {
                     hasLeftIcon={!!leftIcon}
                     hasRightIcon={!!rightIcon}
                     {...props}
+                    min={min}
+                    max={max }
                 />
                 {rightIcon && (
                     <IconRight onClick={onRightIconClick}>

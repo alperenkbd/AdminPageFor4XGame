@@ -4,13 +4,9 @@ import styled from 'styled-components';
 
 
 const ComboBox = (props) => {
-    const [selectedOption, setSelectedOption] = useState(null);
 
-    const { options, label, error, placeholder } = props;
-
-    const handleChange = (option) => {
-        setSelectedOption(option);
-    };
+    const { options, label, error, placeholder, selectedOption, onChange } = props;
+    
 
     //const exampleUsageOfOptions = [
     //    { value: 'option1', label: 'Option 1' },
@@ -23,7 +19,7 @@ const ComboBox = (props) => {
             <Select
                 id="comboBox"
                 value={selectedOption}
-                onChange={handleChange}
+                onChange={onChange}
                 options={options}
                 placeholder={placeholder}
             />
