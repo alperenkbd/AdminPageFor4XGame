@@ -6,6 +6,7 @@ import PntButton from './../Components/PntButton'
 import PntComboBox from './../Components/PntComboBox'
 import { FaPlus } from 'react-icons/fa';
 import styled from 'styled-components';
+import config from './../config'
 
 const exampleColumns = [
     { key: 'id', name: 'Data No' },
@@ -79,7 +80,7 @@ const SConfigurationDashboard = () => {
 
     const fetchBuildingTypes = async () => {
         try {
-            const response = await fetch('https://localhost:7255/api/BuildingType');
+            const response = await fetch(config.apiUrl +'BuildingType');
             if (!response.ok) {
                 setBuildings("Hata..!");
                 throw new Error('Network response was not ok');
@@ -94,7 +95,7 @@ const SConfigurationDashboard = () => {
 
     const fetchConfigData = async () => {
         try {
-            const response = await fetch('https://localhost:7255/api/ConfigData/get');
+            const response = await fetch(config.apiUrl +'ConfigData/get');
             if (!response.ok) {
                 setBuildings("Hata..!");
                 throw new Error('Network response was not ok');
@@ -109,7 +110,7 @@ const SConfigurationDashboard = () => {
     const updateBuildingTypes = async () => {
         var dataWillBeSent = selectedOption.map((d) => ({ Id: d.id, BuildingTypes: d.buildingTypes, IsAdded: true }))
         try {
-            const response = await fetch('https://localhost:7255/api/BuildingType/update', {
+            const response = await fetch(config.apiUrl +'BuildingType/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,7 +140,7 @@ const SConfigurationDashboard = () => {
 
         console.log(configData);
 
-        fetch('https://localhost:7255/api/ConfigData/create', {
+        fetch(config.apiUrl +'ConfigData/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

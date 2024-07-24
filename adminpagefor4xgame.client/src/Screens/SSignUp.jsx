@@ -4,6 +4,7 @@ import PntButton from '../Components/PntButton.jsx';
 import { FaLock, FaUser, FaEnvelope } from 'react-icons/fa';
 import styled, { createGlobalStyle } from 'styled-components';
 import { redirect } from "react-router-dom";
+import config from './../config.jsx'
 
 const SSignUp = () => {
 
@@ -28,7 +29,7 @@ const SSignUp = () => {
         const data = { loginDto: registerData };
 
 
-        fetch('https://localhost:7255/api/Auth/login', {
+        fetch(config.apiUrl +'Auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
