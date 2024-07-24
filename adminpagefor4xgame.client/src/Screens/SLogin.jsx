@@ -3,6 +3,7 @@ import PntInput from '../Components/PntInput.jsx';
 import PntButton from '../Components/PntButton.jsx';
 import { FaLock, FaUser } from 'react-icons/fa';
 import styled, { createGlobalStyle } from 'styled-components';
+import config from './../config.jsx'
 
 
 
@@ -18,7 +19,7 @@ const SLogin = () => {
         const data = { loginDto: loginData };
         
 
-        fetch('https://localhost:7255/api/Auth/login', {
+        fetch(config.apiUrl +'Auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
