@@ -8,10 +8,11 @@
 4. [Prerequisites](#prerequisites)
 5. [Installation](#installation)
 6. [Configuration](#configuration)
-7. [API Endpoints](#api-endpoints)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Contact](#contact)
+7. [Screens](#screens)
+8. [API Endpoints](#api-endpoints)
+9. [Contributing](#contributing)
+10. [License](#license)
+11. [Contact](#contact)
 
 ## Introduction
 
@@ -69,9 +70,24 @@ MongoDB
 - Create a MongoDB cluster and collection as described in the MongoDB documentation.
 - Update the connection string in appsettings.json:
 
+## Screens
+![login](/public/Login.png)
+
+
+![SignUp](/public/Signup.png)
+
+
+![ConfigurationPage](/public/ConfigurationPage.png)
+
+
+![MongoBuildingTypes](/public/MongoBuildingTypes.png)
+
+
+![Mysql_NET8_IDENTITY_DB](/public/Mysql_NET8_IDENTITY_DB.png)
 
 ## API Endpoints
 
+![SwaggerMongoIntegrationSS](/public/SwaggerMongoIntegrationSS.png)
 
 
 ## License
