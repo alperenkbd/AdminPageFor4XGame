@@ -10,6 +10,28 @@ const SLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const Login = async () => {
+        const loginData = {
+            Username: username,
+            Password: password
+        };
+        const data = { loginDto: loginData };
+        
+
+        fetch('https://localhost:7255/api/Auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => console.error('Error:', error));
+    };
+
     const logoUrl = 'https://www.panteon.games/wp-content/uploads/2021/05/news03.png';
 
     const handleUsernameChange = (event) => {
@@ -25,7 +47,7 @@ const SLogin = () => {
     };
 
     const handleButtonClick = () => {
-        alert('Button clicked!');
+         Login();
     };
 
     return (

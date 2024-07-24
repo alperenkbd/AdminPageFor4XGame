@@ -1,11 +1,13 @@
 ﻿using AdminPageFor4XGame.Server.Business;
 using AdminPageFor4XGame.Server.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
 namespace AdminPageFor4XGame.Server.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class BuildingTypeController : Controller
     {
