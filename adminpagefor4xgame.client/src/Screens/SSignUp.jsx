@@ -3,6 +3,7 @@ import PntInput from '../Components/PntInput.jsx';
 import PntButton from '../Components/PntButton.jsx';
 import { FaLock, FaUser, FaEnvelope } from 'react-icons/fa';
 import styled, { createGlobalStyle } from 'styled-components';
+import { redirect } from "react-router-dom";
 
 const SSignUp = () => {
 
@@ -17,6 +18,30 @@ const SSignUp = () => {
         password: '',
         passwordAgain: ''
     });
+
+    const Register = async () => {
+        const registerData = {
+            Username: username,
+            Email:email,
+            Password: password
+        };
+        const data = { loginDto: registerData };
+
+
+        fetch('https://localhost:7255/api/Auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                return redirect("/login");
+            })
+            .catch(error => console.error('Error:', error));
+    };
 
     const logoUrl = 'https://www.panteon.games/wp-content/uploads/2021/05/news03.png';
 
@@ -106,7 +131,7 @@ const SSignUp = () => {
 
     const handleButtonClick = () => {
         if (validateForm()) {
-            alert('Form submitted successfully!');
+            Register();
         }
             
     };
