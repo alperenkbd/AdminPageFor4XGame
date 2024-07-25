@@ -43,11 +43,14 @@ const SSignUp = () => {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status != 200) {
+                if (data.status.statusCode != 200) {
                     toast.error("check these rules \n" + data[0].description)
                 } else {
-                    console.log('Success:', data);
-                    return navigate('/dashboard');
+                    toast.success("Registration has been complated successfully\npage is redirecting to login")
+                    setTimeout(() => {
+                        return navigate('/login');
+                    },[3000])
+                    
                 }
                 
             })
