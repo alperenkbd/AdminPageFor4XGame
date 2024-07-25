@@ -6,8 +6,8 @@ using MongoDB.Driver;
 
 namespace AdminPageFor4XGame.Server.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
-    [Authorize]
     [Route("api/[controller]")]
     public class BuildingTypeController : Controller
     {
