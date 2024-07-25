@@ -6,6 +6,7 @@ import PntButton from './../Components/PntButton'
 import PntComboBox from './../Components/PntComboBox'
 import { FaPlus } from 'react-icons/fa';
 import styled from 'styled-components';
+import toast, { Toaster } from 'react-hot-toast';
 import config from './../config'
 
 const exampleColumns = [
@@ -17,6 +18,7 @@ const exampleColumns = [
 
 
 
+
 const SConfigurationDashboard = () => {
 
     const [buildingCost, setbuildingCost] = useState();
@@ -24,7 +26,7 @@ const SConfigurationDashboard = () => {
     const [buildings, setBuildings] = useState();
     const [configData, setconfigData] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState({value:-1,label:''});
+    const [selectedOption, setSelectedOption] = useState({ value: -1, label: '' });
 
     const [errors, setErrors] = useState({
         buildingType: '',
@@ -50,7 +52,7 @@ const SConfigurationDashboard = () => {
         if (!buildingCost) {
             valid = false;
             newErrors.buildingCost = 'Building Cost is required';
-        } 
+        }
 
         if (buildingCost <= 0) {
             valid = false;
@@ -62,7 +64,7 @@ const SConfigurationDashboard = () => {
             newErrors.constructionTime = 'Building Time is required';
         }
 
-        if (30 > buildingTime || buildingTime >1800) {
+        if (30 > buildingTime || buildingTime > 1800) {
             valid = false;
             newErrors.constructionTime = 'Construction time should be minimum 30 seconds and maximum 1800';
         }
@@ -80,7 +82,7 @@ const SConfigurationDashboard = () => {
 
     const fetchBuildingTypes = async () => {
         try {
-            const response = await fetch(config.apiUrl +'BuildingType');
+            const response = await fetch(config.apiUrl + 'BuildingType');
             if (!response.ok) {
                 setBuildings("Hata..!");
                 throw new Error('Network response was not ok');
@@ -95,7 +97,7 @@ const SConfigurationDashboard = () => {
 
     const fetchConfigData = async () => {
         try {
-            const response = await fetch(config.apiUrl +'ConfigData/get');
+            const response = await fetch(config.apiUrl + 'ConfigData/get');
             if (!response.ok) {
                 setBuildings("Hata..!");
                 throw new Error('Network response was not ok');
@@ -103,14 +105,14 @@ const SConfigurationDashboard = () => {
             const data = await response.json();
             setconfigData(data);
         } catch (error) {
-            console.error('Error fetching building data:', error);
+            toast.error('Error fetching building data:', error);
         }
     };
 
     const updateBuildingTypes = async () => {
-        var dataWillBeSent = selectedOption.map((d) => ({ Id: d.id, BuildingTypes: d.buildingTypes, IsAdded: true }))
+        var dataWillBeSent = selectedOption?.map((d) => ({ Id: d.id, BuildingTypes: d.buildingTypes, IsAdded: true }))
         try {
-            const response = await fetch(config.apiUrl +'BuildingType/update', {
+            const response = await fetch(config.apiUrl + 'BuildingType/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -121,26 +123,26 @@ const SConfigurationDashboard = () => {
             const data = await response.json();
 
             if (!response.ok)
-                alert("Could not update building types..!" + data.Message);
+                toast.error("Could not update building types..!" + data.Message);
             return true;
-            
+
         } catch (error) {
-            console.error('Error updating building data:', error);
+            toast.error('An error occured!');
         }
     };
 
     const createConfigData = async () => {
         const newConfigData = {
-            BuildingTypes: selectedOption.label, 
-            BuildingCost: parseInt(buildingCost, 10), 
-            ConstructionTime: parseInt(buildingTime, 10) 
+            BuildingTypes: selectedOption.label,
+            BuildingCost: parseInt(buildingCost, 10),
+            ConstructionTime: parseInt(buildingTime, 10)
         };
         const configData = { configData: newConfigData };
 
 
         console.log(configData);
 
-        fetch(config.apiUrl +'ConfigData/create', {
+        fetch(config.apiUrl + 'ConfigData/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -148,10 +150,10 @@ const SConfigurationDashboard = () => {
             body: JSON.stringify(newConfigData)
         })
             .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
+            .then(() => {
+                toast.success('Succesfully created, refresh page');
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => toast.error(error));
     };
 
     const checkIsStringEmpty = (value) => {
@@ -202,10 +204,12 @@ const SConfigurationDashboard = () => {
 
     const handleButtonClick = () => {
         if (validateForm()) {
-            updateBuildingTypes(); 
+            updateBuildingTypes();
             createConfigData();
             clearAllInputs();
             closeModal();
+        } else {
+            toast.error('Please check errors!');
         }
     };
 
@@ -254,6 +258,10 @@ const SConfigurationDashboard = () => {
     const imageUrl = 'https://www.panteon.games/wp-content/uploads/2021/05/news03.png';
 
     return (<BackgroundImageContainer imageUrl={imageUrl}>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
 
         <PntDataTable
             customComponent={
@@ -264,7 +272,7 @@ const SConfigurationDashboard = () => {
                     openModal={openModal}
                     closeModal={closeModal}
                     isOpen={isOpen}
-                     />}
+                />}
             columns={exampleColumns}
             rows={configData}
             header={"CONFIGURATION PAGE"}

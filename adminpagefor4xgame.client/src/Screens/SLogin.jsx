@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import PntInput from '../Components/PntInput.jsx';
 import PntButton from '../Components/PntButton.jsx';
+import { useNavigate } from "react-router-dom";
 import { FaLock, FaUser } from 'react-icons/fa';
 import styled, { createGlobalStyle } from 'styled-components';
 import config from './../config.jsx'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -11,27 +13,34 @@ const SLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate()
+    
+
     const Login = async () => {
         const loginData = {
             Username: username,
             Password: password
         };
-        const data = { loginDto: loginData };
-        
 
-        fetch(config.apiUrl +'Auth/login', {
+
+        fetch(config.apiUrl + 'Auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(loginData)
         })
             .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
+            .then((data) => {
+                if (data.status.statusCode == 200) {
+                    return navigate('/dashboard');
+                } else {
+                    toast.error("Check your username and password \nthen try again")
+                }
             })
-            .catch(error => console.error('Error:', error));
+                .catch(error => toast.error("A problem occured moment at login\n" + error))
     };
+    
 
     const logoUrl = 'https://www.panteon.games/wp-content/uploads/2021/05/news03.png';
 
@@ -48,12 +57,16 @@ const SLogin = () => {
     };
 
     const handleButtonClick = () => {
-         Login();
+        Login();
     };
 
     return (
         <>
             <GlobalStyle />
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <AppWrapper>
                 <ImageWrapper>
                     <Image src={logoUrl} alt="Login Logo" />

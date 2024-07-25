@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import PntInput from '../Components/PntInput.jsx';
 import PntButton from '../Components/PntButton.jsx';
+import { useNavigate } from "react-router-dom";
 import { FaLock, FaUser, FaEnvelope } from 'react-icons/fa';
 import styled, { createGlobalStyle } from 'styled-components';
 import { redirect } from "react-router-dom";
 import config from './../config.jsx'
+import toast, { Toaster } from 'react-hot-toast';  
 
 const SSignUp = () => {
 
@@ -12,6 +14,8 @@ const SSignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordAgain, setPasswordAgain] = useState('');
+
+    const navigate = useNavigate()
 
     const [errors, setErrors] = useState({
         username: '',
@@ -26,22 +30,28 @@ const SSignUp = () => {
             Email:email,
             Password: password
         };
-        const data = { loginDto: registerData };
 
 
-        fetch(config.apiUrl +'Auth/login', {
+        fetch(config.apiUrl + 'Auth/register', {
             method: 'POST',
+            dataType: 'JSON',
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8" ,
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(registerData)
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
-                return redirect("/login");
+                if (data.status != 200) {
+                    toast.error("check these rules \n" + data[0].description)
+                } else {
+                    console.log('Success:', data);
+                    return navigate('/dashboard');
+                }
+                
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => toast.error("error occured while connecting to server \n" + error))
     };
 
     const logoUrl = 'https://www.panteon.games/wp-content/uploads/2021/05/news03.png';
@@ -133,6 +143,8 @@ const SSignUp = () => {
     const handleButtonClick = () => {
         if (validateForm()) {
             Register();
+        } else {
+            toast.error("check form please!")
         }
             
     };
@@ -140,6 +152,10 @@ const SSignUp = () => {
     return (
         <>
             <GlobalStyle />
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <AppWrapper>
                 <ImageWrapper>
                     <Image src={logoUrl} alt="Login Logo" />
