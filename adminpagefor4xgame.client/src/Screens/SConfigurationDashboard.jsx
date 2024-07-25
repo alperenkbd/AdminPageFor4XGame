@@ -76,9 +76,14 @@ const SConfigurationDashboard = () => {
 
 
     useEffect(() => {
-        fetchConfigData();
-        fetchBuildingTypes();
+
+        fetchConfigData()
     }, []);
+
+    useEffect(() => {
+
+        fetchBuildingTypes()
+    }, [configData]);
 
     const fetchBuildingTypes = async () => {
         try {
@@ -88,7 +93,8 @@ const SConfigurationDashboard = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const cleanData = await data.map(data => ({ value: data.id, label: data.buildingTypes }))
+            let result = data.filter(o1 => !configData.some(o2 => o1.buildingTypes === o2.buildingTypes  ));
+            const cleanData = await result.map(data => ({ value: data.id, label: data.buildingTypes }))
             setBuildings(cleanData);
         } catch (error) {
             console.error('Error fetching building data:', error);
@@ -97,13 +103,16 @@ const SConfigurationDashboard = () => {
 
     const fetchConfigData = async () => {
         try {
-            const response = await fetch(config.apiUrl + 'ConfigData/get');
-            if (!response.ok) {
-                setBuildings("Hata..!");
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setconfigData(data);
+            await fetch(config.apiUrl + 'ConfigData/get')
+                .then(async (response) => {
+                    if (!response.ok) {
+                        setBuildings("Hata..!");
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    setconfigData(data);
+                })
+            
         } catch (error) {
             toast.error('Error fetching building data:', error);
         }
